@@ -31,3 +31,5 @@ desktop.ini
 *.properties.local
 secrets.properties*.LCK*
 *~
+maven_java.py
+proyecto_consolidado.txt

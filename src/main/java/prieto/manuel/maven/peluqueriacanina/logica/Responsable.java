@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -12,7 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 // Especifica el nombre exacto de la tabla en MySQL
-@jakarta.persistence.Table(name = "responsable")
+@Table(name = "responsable")
 public class Responsable implements Serializable {
 
     //Version explicita del contrato de serializacion
