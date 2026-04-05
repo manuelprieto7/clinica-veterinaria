@@ -1,0 +1,32 @@
+# Maven genera esta carpeta en cada build. Son archivos DERIVADOS,
+# no código fuente. Nunca deben versionarse.
+target/
+# Archivo de empaquetado final. Se regenera con 'mvn package'.
+*.jar
+*.war
+*.ear
+# NetBeans: archivos de configuración LOCAL del IDE.
+nbproject/private/
+nb-configuration.xml
+*.nbprotocols
+nbactions.xml
+# IntelliJ IDEA 
+.idea/
+*.iml
+*.iws
+*.ipr
+# Eclipse / VS Code
+.classpath
+.project
+.settings/
+.vscode/
+# SISTEMA OPERATIVO
+# Windows genera este archivo en cada carpeta que abre con el Explorador
+# Es metadata del SO, no tiene nada que ver con el proyecto.
+Thumbs.db
+desktop.ini
+# macOS (por si algún colaborador usa Mac)
+.DS_Store
+# ARCHIVOS SENSIBLES — CREDENCIALES
+*.properties.local
+secrets.properties
