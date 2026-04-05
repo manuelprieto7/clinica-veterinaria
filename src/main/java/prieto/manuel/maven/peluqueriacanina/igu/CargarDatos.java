@@ -8,14 +8,14 @@ package prieto.manuel.maven.peluqueriacanina.igu;
  *
  * @author G513
  */
-public class Principal extends javax.swing.JFrame {
+public class CargarDatos extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Principal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CargarDatos.class.getName());
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public CargarDatos() {
         initComponents();
         //Cargamos la imagen despues de initComponets 
         //porque debe existe anres de podamos asignarle un icono
@@ -156,20 +156,12 @@ public class Principal extends javax.swing.JFrame {
     private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
         // TODO add your handling code here:
         VerDatos pantalla = new VerDatos();
-        
-        pantalla.setLocationRelativeTo(null);
-        pantalla.setVisible(true);
-        this.dispose();
+
         
     }//GEN-LAST:event_btnVerDatosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        // Cerramos el entityManagerFactory antes de salir
-        //sin esto la conexion podria quedar abiera
-        prieto.manuel.maven.peluqueriacanina.persistencia.JpaUtil.cerrar();
-        //terminamos el proceso
-        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cargarImagen() {
