@@ -33,3 +33,6 @@ secrets.properties*.LCK*
 *~
 maven_java.py
 proyecto_consolidado.txt
+.mvn/
+mvnw
+mvnw.cmd
