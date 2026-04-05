@@ -1,92 +1,67 @@
-# 🐾 Sistema de Gestión — Peluquería Canina
+# 🐾 Peluquería Canina
 
-> Aplicación de escritorio para la gestión integral de mascotas,
-> responsables y servicios de una peluquería canina.
-> Construida con Java SE, Swing, JPA y MySQL.
-
----
-
-## 📋 Descripción del Proyecto
-
-Este sistema permite registrar, consultar, modificar y eliminar
-mascotas y sus responsables. Fue desarrollado como proyecto de
-portafolio aplicando arquitectura en capas, buenas prácticas de
-codificación y control de versiones profesional con Git Flow.
+Sistema de escritorio para gestión de mascotas y sus responsables.
+Desarrollado en Java SE con Swing, JPA puro y MySQL.
 
 ---
 
-## 🏗️ Arquitectura
+## Stack
 
-El proyecto sigue una arquitectura de **3 capas** estrictamente separadas:
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Maven](https://img.shields.io/badge/Maven-3.x-red)
+![JPA](https://img.shields.io/badge/JPA-EclipseLink_4.0-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8.x-blue)
+
+---
+
+## Qué hace
+
+- Registrar, editar y eliminar mascotas y sus responsables
+- Visualizar todos los registros en tabla interactiva
+- Persistencia real con JPA y MySQL sin frameworks intermedios
+
+---
+
+## Arquitectura
 ```
-[ IGU - Swing ]
-      │  Recibe input del usuario y delega
-      ▼
-[ Lógica - Controladora ]
-      │  Valida reglas de negocio y construye entidades
-      ▼
-[ Persistencia - JPA / EclipseLink ]
-      │  Gestiona la comunicación con la base de datos
-      ▼
-[ MySQL - Base de Datos ]
+[ Swing — IGU ]  →  [ Controladora — Lógica ]  →  [ JPA — Persistencia ]  →  [ MySQL ]
 ```
 
----
-
-## 🛠️ Tecnologías Utilizadas
-
-| Tecnología        | Versión  | Propósito                        |
-|-------------------|----------|----------------------------------|
-| Java SE           | 21       | Lenguaje principal               |
-| Maven             | 3.x      | Gestión de dependencias y build  |
-| JPA (EclipseLink) | 4.0.2    | Mapeo objeto-relacional (ORM)    |
-| MySQL             | 8.x      | Motor de base de datos           |
-| Swing             | (JDK 21) | Interfaz gráfica de escritorio   |
+Tres capas con responsabilidades separadas.
+La lógica de negocio no toca la UI. La persistencia no toca la lógica.
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+## Cómo ejecutarlo
 
-### Pre-requisitos
-- Java 21 instalado
-- Maven 3.x instalado
-- MySQL 8.x corriendo en localhost:3306
-
-### Pasos
-
-1. Cloná el repositorio:
+**Requisitos:** Java 21, Maven 3.x, MySQL 8.x en `localhost:3306`
 ```bash
-   git clone https://github.com/tu-usuario/peluqueria-canina.git
+git clone https://github.com/manuelprieto7/peluqueria-canina.git
+cd peluqueria-canina
 ```
-
-2. Creá la base de datos en MySQL:
 ```sql
-   CREATE DATABASE peluqueriacanina;
+CREATE DATABASE peluqueriacanina;
 ```
 
-3. Configurá las credenciales en `src/main/resources/META-INF/persistence.xml`
-
-4. Compilá y ejecutá con Maven:
+Configurar credenciales en `src/main/resources/META-INF/persistence.xml`
 ```bash
-   mvn clean package
-   mvn exec:java
+mvn clean package && mvn exec:java
 ```
 
 ---
 
-## 📁 Estructura del Proyecto
-```
-src/
-└── main/
-    └── java/
-        └── prieto/manuel/maven/peluqueriacanina/
-            ├── igu/              # Pantallas Swing (Vista)
-            ├── logica/           # Entidades JPA + Controladora (Lógica)
-            └── persistencia/     # JPA Controllers + utilidades (Datos)
-```
+## Estado
 
+| Hito                          | Estado        |
+|-------------------------------|---------------|
+| Git Flow y estructura         | ✅ Completo   |
+| Refactorización de entidades  | 🔄 En curso   |
+| Validaciones y excepciones    | ⏳ Pendiente  |
+| Citas y estados de mascota    | ⏳ Pendiente  |
+| Documentación final           | ⏳ Pendiente  |
 
-## 👤 Autor
+---
 
-**Manuel Prieto**
-- GitHub:  manuelprieto7 (https://github.com/manuelprieto7)
+## Autor
+
+**Manuel Prieto** — [manuelprieto7](https://github.com/manuelprieto7)
