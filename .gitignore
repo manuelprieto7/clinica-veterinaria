@@ -29,4 +29,5 @@ desktop.ini
 .DS_Store
 # ARCHIVOS SENSIBLES — CREDENCIALES
 *.properties.local
-secrets.properties
+secrets.properties*.LCK*
+*~
