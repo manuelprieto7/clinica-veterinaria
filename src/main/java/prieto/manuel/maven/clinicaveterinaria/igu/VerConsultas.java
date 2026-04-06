@@ -15,7 +15,7 @@ import prieto.manuel.maven.clinicaveterinaria.logica.Mascota;
  * @author G513
  */
 public class VerConsultas extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerConsultas.class.getName());
     Controladora control = null;
     int idMascota;
@@ -35,7 +35,7 @@ public class VerConsultas extends javax.swing.JFrame {
         Mascota m = control.traerMascota(idMascota);
         if (m != null) {
             // mostramos el nombre real
-            lblNombreMascota.setText("Mascota :" + m.getNombreMascota());
+            lblNombreMascota.setText("Mascota: " + m.getNombreMascota());
         }
         //cargamos el historial al abrir la ventana
         cargarTabla();
@@ -181,36 +181,38 @@ public class VerConsultas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        DefaultTableModel modelo = new DefaultTableModel(){
-            public boolean isCellEditable(int row, int column){
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
+
         // definimos las columnas el orden aqui determina el orden visual
-        String[] titulos = {"ID","Fecha",
-            "Motivo", "Diagnostico","Tratamiento","Veterinario"};
-        
+        String[] titulos = {"ID", "Fecha",
+            "Motivo", "Diagnostico", "Tratamiento", "Veterinario"};
+
+        modelo.setColumnIdentifiers(titulos);
+
         //Traemos la consultas por mascotas segun el id
         List<Consulta> lista = control.traerConsultasPorMascota(idMascota);
-        
-        if(lista!= null){
-            for(Consulta c : lista){
+
+        if (lista != null) {
+            for (Consulta c : lista) {
                 //Object porque mezclamos int, localDate y String
                 Object[] fila = {
-                  c.getId(),
-                  c.getFechaConsulta() != null ? c.getFechaConsulta().toString() : "-",
-                  c.getMotivo(),
-                  c.getDiagnostico(),
-                  c.getTratamiento(),
-                  c.getVeterinario()
+                    c.getId(),
+                    c.getFechaConsulta() != null ? c.getFechaConsulta().toString() : "-",
+                    c.getMotivo(),
+                    c.getDiagnostico(),
+                    c.getTratamiento(),
+                    c.getVeterinario()
                 };
                 modelo.addRow(fila);
             }
-            
-            // asigmamos luiego el modelo a la tabla dinamica
-            tablaPrincipal.setModel(modelo);
+
         }
-        
+        // asigmamos luiego el modelo a la tabla dinamica
+        tablaPrincipal.setModel(modelo);
+
     }
 }

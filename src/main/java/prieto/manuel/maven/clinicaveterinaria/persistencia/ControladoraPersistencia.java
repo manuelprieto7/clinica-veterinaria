@@ -56,6 +56,7 @@ public class ControladoraPersistencia {
             // SIEMPRE se cierra el EM, haya error o no
             // Sin esto, la conexion queda abierta y 
             //se agota el pool(conjunto de conexiones abiertas a la bd).
+            em.close();
         }
 
     }
