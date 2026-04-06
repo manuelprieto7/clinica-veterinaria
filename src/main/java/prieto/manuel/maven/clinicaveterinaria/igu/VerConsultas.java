@@ -39,6 +39,15 @@ public class VerConsultas extends javax.swing.JFrame {
         }
         //cargamos el historial al abrir la ventana
         cargarTabla();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                VerDatos pantalla = new VerDatos();
+                pantalla.setLocationRelativeTo(null);
+                pantalla.setVisible(true);
+            }
+        });
     }
 
     /**

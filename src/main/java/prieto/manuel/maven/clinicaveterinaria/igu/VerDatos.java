@@ -219,9 +219,11 @@ public class VerDatos extends javax.swing.JFrame {
                 pantalla.setLocationRelativeTo(null);
                 pantalla.setVisible(true);
                 this.dispose();
+            }else {
+                JOptionPane.showMessageDialog(this, "Selecciona una mascota para ver su historial.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona una mascota para ver su historial", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No hay mascotas registradas.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnVerHistorialActionPerformed
 
