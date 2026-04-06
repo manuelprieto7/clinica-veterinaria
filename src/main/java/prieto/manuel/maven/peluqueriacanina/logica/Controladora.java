@@ -1,5 +1,6 @@
 package prieto.manuel.maven.peluqueriacanina.logica;
 
+import java.time.LocalDate;
 import java.util.List;
 import prieto.manuel.maven.peluqueriacanina.persistencia.ControladoraPersistencia;
 
@@ -25,7 +26,7 @@ public class Controladora {
         }
         if (nombreResponsable == null || nombreResponsable.isBlank()) {
             throw new IllegalArgumentException("El nombre del responsable no puede estar vacío.");
-            
+
         }
 
         // Construccion del responsable en memoria
@@ -50,24 +51,55 @@ public class Controladora {
         // llama a guardar en la controladoraP
         // persiste responsable y mascota en una sola transaccion
         cp.guardar(responsable, mascota);
-        
+
     }
-    
-    
-        // READ — todas las mascotas
-  
+
+    // CONSULTAS 
+    public void guardarConsulta(int idMascota, String motivo, String diagnostico,
+            String tratamiento, String veterinario) {
+
+        if (motivo == null || motivo.isBlank()) {
+            throw new IllegalArgumentException("El motivo de la consulta no puede estar vacio.");
+        }
+
+        // Buscamos la mascota por ID para establecer la relacion ManyToOne
+        Mascota mascota = cp.traerMascota(idMascota);
+        if (mascota == null) {
+            throw new IllegalArgumentException("No existe una mascota en ese Id.");
+        }
+
+        Consulta consulta = new Consulta();
+
+        // localDate.now captura la fecha actual del sistema
+        consulta.setFechaConsulta(LocalDate.now());
+        consulta.setMotivo(motivo);
+        consulta.setDiagnostico(diagnostico);
+        consulta.setTratamiento(tratamiento);
+        consulta.setVeterinario(veterinario);
+        // Establecemos la relacion
+        consulta.setMascota(mascota);
+
+        // llamamos guardarConsulta en ControladoraP
+        cp.guardarConsulta(consulta);
+
+    }
+
+    public List<Consulta> traerConsultasPorMascota(int idMascota) {
+        return cp.traerConsultasPorMascota(idMascota);
+    }
+
+    // READ — todas las mascotas
     public List<Mascota> traerMascotas() {
         // Llama a traerMascotas en ControladoraP
         // obtener la lista completa desde la BD
         return cp.traerMascotas();
     }
 
-
     // Read - una mascota por ID
     public Mascota traerMascota(int numCliente) {
-        
+
         return cp.traerMascota(numCliente);
-        
+
     }
 
     // Update
@@ -75,7 +107,7 @@ public class Controladora {
             String raza, String color, String alergico,
             String atencionEspecial, String observaciones,
             String nombreResponsable, String celResponsable) {
-        
+
         if (nombreMascota == null || nombreMascota.isBlank()) {
             throw new IllegalArgumentException("El nombre de la mascota no puede estar vacío.");
         }
@@ -98,7 +130,7 @@ public class Controladora {
         // Llama a modificarMascota en la Cpersitencia
         // para hacer merge en ambos objetos en una sola transaccion
         cp.modificarMascota(mascota, responsable);
-        
+
     }
 
     //Delete 
@@ -106,5 +138,5 @@ public class Controladora {
         // Llama a borrar mascota de la Cpersitencia
         cp.borrarMascota(numCliente);
     }
-    
+
 }

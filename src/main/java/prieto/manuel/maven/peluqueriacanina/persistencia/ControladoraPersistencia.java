@@ -2,6 +2,7 @@ package prieto.manuel.maven.peluqueriacanina.persistencia;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import prieto.manuel.maven.peluqueriacanina.logica.Consulta;
 import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
 import prieto.manuel.maven.peluqueriacanina.logica.Responsable;
 
@@ -58,8 +59,46 @@ public class ControladoraPersistencia {
         }
 
     }
-    
-    
+
+    // Crud consulta
+    public void guardarConsulta(Consulta consulta) {
+
+        EntityManager em = getEm();
+
+        try {
+            em.getTransaction().begin();
+            // persist la consulta es nueva - JPA genera su Id
+            em.persist(consulta);
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+            throw new RuntimeException("Error al guardar la consulta: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+
+    }
+
+    public List<Consulta> traerConsultasPorMascota(int idMascota) {
+
+        EntityManager em = getEm();
+
+        try {
+            // JPQL : traemos solo las consultas de la mascota seleccionada
+            // filtrando por el Id de mascota en la fk
+            return em.createQuery("SELECT c FROM Consulta c WHERE c.mascota.num_cliente = :idMascota",
+                    Consulta.class).setParameter("idMascota", idMascota).getResultList();
+
+        } finally {
+            em.close();
+
+        }
+
+    }
 
     // Read - Traer una mascota
     public Mascota traerMascota(int numCliente) {
@@ -72,94 +111,89 @@ public class ControladoraPersistencia {
 
         }
     }
-    
-      // READ — traer todas las mascotas
+
+    // READ — traer todas las mascotas
     public List<Mascota> traerMascotas() {
         EntityManager em = getEm();
         try {
             // JPQL: lenguaje de consulta de JPA opera sobre clases java
             // no sobre tablas SQL, "m" es el alias de Mascota
             return em.createQuery("SELECT m FROM Mascota m", Mascota.class)
-                     .getResultList();
+                    .getResultList();
         } finally {
             // READ no necesita transacción explícita, pero el EM
             // siempre se cierra para liberar la conexión
-            
+
             em.close();
         }
     }
-    
+
     // Read - traer un responsable por Id
-    
-    public Responsable traerResponsable(int id){
+    public Responsable traerResponsable(int id) {
         EntityManager em = getEm();
-        
-        try{
+
+        try {
             return em.find(Responsable.class, id);
         } finally {
             em.close();
         }
     }
-    
+
     // Update 
-    
-    public void modificarMascota(Mascota mascota, Responsable responsable){
-        
+    public void modificarMascota(Mascota mascota, Responsable responsable) {
+
         EntityManager em = getEm();
-        
-        try{
+
+        try {
             em.getTransaction().begin();
-            
+
             // merge toma un objeto DETACHED (fuera del contexto JPA)
             // y sincroniza sus cambios con la BD
             // a diferencia de persist, merge funciona con objetos
             // que ya tiene id asignado (ya existe en la BD)
-            
             em.merge(mascota);
             em.merge(responsable);
-            
+
             em.getTransaction().commit();
-            
-        }catch(Exception e){
-            if(em.getTransaction().isActive()){
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error al modificar: " + e.getMessage(), e);
-        } finally{
+        } finally {
             em.close();
         }
-        
+
     }
-    
+
     // Delete
-    
-    public void borrarMascota(int numCliente){
+    public void borrarMascota(int numCliente) {
         EntityManager em = getEm();
-        
-        try{
+
+        try {
             em.getTransaction().begin();
-            
+
             // find dentro de la transaccion retorna un objeto Managed
             // (dentro del contexto JPA) que es lo que remove necesita
-            
             Mascota mascota = em.find(Mascota.class, numCliente);
-            
-            if(mascota != null){
+
+            if (mascota != null) {
                 // remove marca el objeto para la eliminacion
                 // El DELETE SQL se ejecuta en el commit
                 em.remove(mascota);
                 em.getTransaction().commit();
-            }else {
+            } else {
                 // Si no existe, no hay nada que borrar
                 //Cancelamos la transaccion limpiamente
                 em.getTransaction().rollback();
             }
-        } catch(Exception e){
-            if(em.getTransaction().isActive()){
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error al borrar: " + e.getMessage(), e);
-        } finally{
+        } finally {
             em.close();
         }
     }
