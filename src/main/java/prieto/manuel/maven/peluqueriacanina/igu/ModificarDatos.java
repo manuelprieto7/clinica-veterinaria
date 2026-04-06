@@ -30,7 +30,7 @@ public class ModificarDatos extends javax.swing.JFrame {
         cargarImagen();
         // cargamos datos de la mascota seleccionada
         // para asi pre-llenar el formulario
-        cargarDatos();
+        cargarDatos(numCliente);
     }
 
     /**
