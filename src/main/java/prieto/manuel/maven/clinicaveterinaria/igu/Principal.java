@@ -46,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dubai", 0, 48)); // NOI18N
-        jLabel1.setText("Peluquería Canina");
+        jLabel1.setText("Clínica Veterinaria");
 
         btnSalir.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
         btnSalir.setText("Salir");

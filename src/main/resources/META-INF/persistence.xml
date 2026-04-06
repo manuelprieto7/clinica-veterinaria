@@ -7,7 +7,8 @@
     <class>prieto.manuel.maven.clinicaveterinaria.logica.Responsable</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/mysql?serverTimezone=UTC"/>
+        <property name="jakarta.persistence.jdbc.url" 
+          value="jdbc:mysql://localhost:3308/clinica_veterinaria?serverTimezone=UTC"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.password" value=""/>

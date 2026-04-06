@@ -289,7 +289,6 @@ public class VerDatos extends javax.swing.JFrame {
                     masco.getColor(),
                     masco.getAlergico(),
                     masco.getAtencionEspecial(),
-                    masco.getObservaciones(),
                     nombreResp,
                     movilResp
                 
@@ -368,7 +367,7 @@ public class VerDatos extends javax.swing.JFrame {
         
         URL urlEliminar= getClass().getResource("/imagenes/eliminar.png");
         
-        btnVerHistorial.setIcon(new ImageIcon(urlEliminar));
+        btnEliminar.setIcon(new ImageIcon(urlEliminar));
         
         URL urlEditar = getClass().getResource("/imagenes/editar.png");
         
