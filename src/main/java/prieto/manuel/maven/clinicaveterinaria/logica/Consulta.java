@@ -1,4 +1,4 @@
-package prieto.manuel.maven.peluqueriacanina.logica;
+package prieto.manuel.maven.clinicaveterinaria.logica;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

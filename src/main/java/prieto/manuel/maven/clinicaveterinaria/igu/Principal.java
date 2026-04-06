@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prieto.manuel.maven.peluqueriacanina.igu;
+package prieto.manuel.maven.clinicaveterinaria.igu;
 
 import java.awt.Image;
 import java.net.URL;
@@ -166,7 +166,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         // Cerramos el entityManagerFactory antes de salir
         //sin esto la conexion podria quedar abiera
-        prieto.manuel.maven.peluqueriacanina.persistencia.JpaUtil.cerrar();
+        prieto.manuel.maven.clinicaveterinaria.persistencia.JpaUtil.cerrar();
         //terminamos el proceso
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed

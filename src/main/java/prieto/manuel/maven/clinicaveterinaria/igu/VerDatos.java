@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prieto.manuel.maven.peluqueriacanina.igu;
+package prieto.manuel.maven.clinicaveterinaria.igu;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,8 +11,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import prieto.manuel.maven.peluqueriacanina.logica.Controladora;
-import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
+import prieto.manuel.maven.clinicaveterinaria.logica.Controladora;
+import prieto.manuel.maven.clinicaveterinaria.logica.Mascota;
 
 /**
  *
@@ -67,9 +67,10 @@ public class VerDatos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPrincipal = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
+        btnVerHistorial = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,11 +93,11 @@ public class VerDatos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaPrincipal);
 
-        btnEliminar.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnVerHistorial.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        btnVerHistorial.setText("Ver Historial");
+        btnVerHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnVerHistorialActionPerformed(evt);
             }
         });
 
@@ -116,6 +117,14 @@ public class VerDatos extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -126,12 +135,19 @@ public class VerDatos extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                                    .addComponent(btnVerHistorial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,6 +162,8 @@ public class VerDatos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(btnVerHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -154,14 +172,15 @@ public class VerDatos extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(262, 262, 262))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,31 +206,24 @@ public class VerDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHistorialActionPerformed
         // TODO add your handling code here:
-        //Verificamos que la tabla tenga filas antes de intentar eliminar
-        if (tablaPrincipal.getRowCount() > 0) {
-
-            // getSelectedRow retorna -1 si el usuario no selecciono ninguna fila
-            if (tablaPrincipal.getSelectedRow() != -1) {
-
-                //Columna 0 de la tabla = num_cliente
-                int numCliente = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
-
-                // llamamos a borrar mascota en la controladora
-                control.borrarMascota(numCliente);
-                JOptionPane.showMessageDialog(this, "Mascota eliminada correctamente", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
-                // Recargamos la tabla para reflejar el cambio 
-                cargarTabla();
-            } else {
-                JOptionPane.showMessageDialog(this, "No selecciono ninguna mascota.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+        if(tablaPrincipal.getRowCount() > 0){
+            if(tablaPrincipal.getSelectedRow() != -1){
                 
+                // Columna = 0 mum_cliente (PK mascota)
+                int numCliente = Integer.parseInt(
+                        String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
+                // Pasamos el id a verConsultas para abrir el historial de la mascota seleccionada
+                VerConsultas pantalla = new VerConsultas(numCliente);
+                pantalla.setLocationRelativeTo(null);
+                pantalla.setVisible(true);
+                this.dispose();
             }
-            
         } else {
-            JOptionPane.showMessageDialog(this, "No hay mascotas para eliminar.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona una mascota para ver su historial", "Error", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_btnVerHistorialActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
@@ -301,10 +313,37 @@ public class VerDatos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+             //Verificamos que la tabla tenga filas antes de intentar eliminar
+        if (tablaPrincipal.getRowCount() > 0) {
+
+            // getSelectedRow retorna -1 si el usuario no selecciono ninguna fila
+            if (tablaPrincipal.getSelectedRow() != -1) {
+
+                //Columna 0 de la tabla = num_cliente
+                int numCliente = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
+
+                // llamamos a borrar mascota en la controladora
+                control.borrarMascota(numCliente);
+                JOptionPane.showMessageDialog(this, "Mascota eliminada correctamente", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+                // Recargamos la tabla para reflejar el cambio 
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "No selecciono ninguna mascota.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay mascotas para eliminar.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnVerHistorial;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -329,7 +368,7 @@ public class VerDatos extends javax.swing.JFrame {
         
         URL urlEliminar= getClass().getResource("/imagenes/eliminar.png");
         
-        btnEliminar.setIcon(new ImageIcon(urlEliminar));
+        btnVerHistorial.setIcon(new ImageIcon(urlEliminar));
         
         URL urlEditar = getClass().getResource("/imagenes/editar.png");
         

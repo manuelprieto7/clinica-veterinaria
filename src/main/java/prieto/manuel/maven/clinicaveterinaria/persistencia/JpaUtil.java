@@ -1,4 +1,4 @@
-package prieto.manuel.maven.peluqueriacanina.persistencia;
+package prieto.manuel.maven.clinicaveterinaria.persistencia;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

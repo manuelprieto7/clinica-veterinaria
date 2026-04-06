@@ -2,7 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prieto.manuel.maven.peluqueriacanina.igu;
+package prieto.manuel.maven.clinicaveterinaria.igu;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import prieto.manuel.maven.clinicaveterinaria.logica.Consulta;
+import prieto.manuel.maven.clinicaveterinaria.logica.Controladora;
+import prieto.manuel.maven.clinicaveterinaria.logica.Mascota;
 
 /**
  *
@@ -11,12 +17,28 @@ package prieto.manuel.maven.peluqueriacanina.igu;
 public class VerConsultas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerConsultas.class.getName());
+    Controladora control = null;
+    int idMascota;
 
     /**
      * Creates new form CargaConsulta
+     *
+     * @param idMascota
      */
     public VerConsultas(int idMascota) {
+        // guardamos el id antes de initC porque cargartabla lo necesita 
+        this.idMascota = idMascota;
+        control = new Controladora();
         initComponents();
+        //actualizamos el label con el nombre real de la mascota
+        // busca por id si no existe marca como null
+        Mascota m = control.traerMascota(idMascota);
+        if (m != null) {
+            // mostramos el nombre real
+            lblNombreMascota.setText("Mascota :" + m.getNombreMascota());
+        }
+        //cargamos el historial al abrir la ventana
+        cargarTabla();
     }
 
     /**
@@ -31,10 +53,10 @@ public class VerConsultas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblNombreMascota = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPrincipal = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnNuevaConsulta = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -44,7 +66,7 @@ public class VerConsultas extends javax.swing.JFrame {
         lblNombreMascota.setFont(new java.awt.Font("Dubai", 0, 24)); // NOI18N
         lblNombreMascota.setText("Mascota: Rex");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -55,19 +77,19 @@ public class VerConsultas extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPrincipal);
 
-        jButton3.setText("Nueva Consulta");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevaConsulta.setText("Nueva Consulta");
+        btnNuevaConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnNuevaConsultaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
 
@@ -77,17 +99,17 @@ public class VerConsultas extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNuevaConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNuevaConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -128,22 +150,67 @@ public class VerConsultas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnNuevaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaConsultaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        // abrimos cargarConsulta pasando el id de la mascota actual
+        // para abrir el formulario de nueva consulta con contexto de la mascota
+        CargarConsulta pantalla = new CargarConsulta(idMascota);
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNuevaConsultaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        // devolvemos a verDatos sin perder el contexto
+        VerDatos pantalla = new VerDatos();
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnNuevaConsulta;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblNombreMascota;
+    private javax.swing.JTable tablaPrincipal;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        // definimos las columnas el orden aqui determina el orden visual
+        String[] titulos = {"ID","Fecha",
+            "Motivo", "Diagnostico","Tratamiento","Veterinario"};
+        
+        //Traemos la consultas por mascotas segun el id
+        List<Consulta> lista = control.traerConsultasPorMascota(idMascota);
+        
+        if(lista!= null){
+            for(Consulta c : lista){
+                //Object porque mezclamos int, localDate y String
+                Object[] fila = {
+                  c.getId(),
+                  c.getFechaConsulta() != null ? c.getFechaConsulta().toString() : "-",
+                  c.getMotivo(),
+                  c.getDiagnostico(),
+                  c.getTratamiento(),
+                  c.getVeterinario()
+                };
+                modelo.addRow(fila);
+            }
+            
+            // asigmamos luiego el modelo a la tabla dinamica
+            tablaPrincipal.setModel(modelo);
+        }
+        
+    }
 }

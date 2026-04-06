@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prieto.manuel.maven.peluqueriacanina.igu;
+package prieto.manuel.maven.clinicaveterinaria.igu;
 
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import prieto.manuel.maven.peluqueriacanina.logica.Controladora;
+import prieto.manuel.maven.clinicaveterinaria.logica.Controladora;
 
 /**
  *

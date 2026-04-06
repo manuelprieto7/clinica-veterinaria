@@ -2,35 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package prieto.manuel.maven.peluqueriacanina.igu;
+package prieto.manuel.maven.clinicaveterinaria.igu;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
-import prieto.manuel.maven.peluqueriacanina.logica.Controladora;
-import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
+import prieto.manuel.maven.clinicaveterinaria.logica.Controladora;
 
 /**
  *
  * @author G513
  */
-public class ModificarDatos extends javax.swing.JFrame {
+public class CargarDatos extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ModificarDatos.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CargarDatos.class.getName());
 
-    Controladora control = null;
-    // traemos a la mascota para modificar necesitamos el obj con su Id
-    //  para que JPA pueda hacer el merge correctamente
-    Mascota mascota = new Mascota();
+    Controladora control = new Controladora();
 
-    // ModificarDatos siempre recibe un Id - nunca se abre sin datos
-    public ModificarDatos(int numCliente) {
-        control = new Controladora();
+    /**
+     * Creates new form Principal
+     */
+    public CargarDatos() {
         initComponents();
         //Cargamos la imagen despues de initComponets 
         //porque debe existe anres de podamos asignarle un icono
         cargarImagen();
-        // cargamos datos de la mascota seleccionada
-        // para asi pre-llenar el formulario
-        cargarDatos(numCliente);
+        // cuando el usuario cierra la ventana, volvemos a mostrar principal
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent  evt) {
+                Principal ventana = new Principal();
+                ventana.setLocationRelativeTo(null);
+                ventana.setVisible(true);
+            }
+        });
+
     }
 
     /**
@@ -70,7 +76,7 @@ public class ModificarDatos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dubai", 0, 48)); // NOI18N
-        jLabel1.setText("Modificar Datos");
+        jLabel1.setText("Cargar Datos");
 
         jLabel3.setFont(new java.awt.Font("Dubai", 0, 14)); // NOI18N
         jLabel3.setText("Nombre: ");
@@ -88,14 +94,14 @@ public class ModificarDatos extends javax.swing.JFrame {
         jLabel7.setText("Atención Especial:");
 
         jLabel9.setFont(new java.awt.Font("Dubai", 0, 14)); // NOI18N
-        jLabel9.setText("Nombre del Dueño:");
+        jLabel9.setText("Nombre del Responsable:");
 
         cmbAtencionEsp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "SI", "NO" }));
 
         cmbAlergico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "SI", "NO" }));
 
         jLabel8.setFont(new java.awt.Font("Dubai", 0, 14)); // NOI18N
-        jLabel8.setText("Móvil del Dueño:");
+        jLabel8.setText("Móvil del Responsable:");
 
         jLabel10.setFont(new java.awt.Font("Dubai", 0, 14)); // NOI18N
         jLabel10.setText("Observaciones:");
@@ -142,7 +148,7 @@ public class ModificarDatos extends javax.swing.JFrame {
                             .addComponent(txtMovilResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombreResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,21 +218,19 @@ public class ModificarDatos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(115, 115, 115)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +250,7 @@ public class ModificarDatos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))))
+                        .addGap(35, 35, 35))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,10 +277,20 @@ public class ModificarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        //Vaciamos todos los campos de text
+        txtNombre.setText("");
+        txtRaza.setText("");
+        txtColor.setText("");
+        txtNombreResponsable.setText("");
+        txtMovilResponsable.setText("");
+        txtObservaciones.setText("");
 
-        // restauramos los datos originales
-        // es decir, recargamos desde el obj mascota que ya tenemos
-        cargarDatos(mascota.getNum_cliente());
+        // Indice a 0 para dejar por default el cmb
+        cmbAlergico.setSelectedIndex(0);
+        cmbAtencionEsp.setSelectedIndex(0);
+
+        //devolvemos el foco al primer campo
+        txtNombre.requestFocus();
 
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -303,23 +317,20 @@ public class ModificarDatos extends javax.swing.JFrame {
         }
 
         try {
-            // pasamos el obj mascota completo (con su ID) y los nuevos valores
-            // la controladora act mascota y el responsable
-            control.modificarMascota(mascota, nombre, raza, color, alergico, atencionEsp, observaciones, nomResponsable, movilReponsable);
+            // Llamamos a guardar en la controladora
+            // para construir las entidades y poder persistirlas en la BD
+            control.guardar(nombre, raza, color, alergico, atencionEsp, observaciones, nomResponsable, movilReponsable);
 
             // mostramos msj al usuario de confirmacion
-            JOptionPane.showMessageDialog(this, "Edición realizada correctamente", "Edición correcta", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Se guardo correctamente", "Guardado Exitoso!", JOptionPane.INFORMATION_MESSAGE);
 
-            // volvemnos a verDatos para que el usuario vea los cambios
-            VerDatos pantalla = new VerDatos();
-            pantalla.setLocationRelativeTo(null);
-            pantalla.setVisible(true);
-            this.dispose();
+            // Limpiamos el form para asi poder cargar a la siguiente mascota
+            btnLimpiarActionPerformed(evt);
 
         } catch (RuntimeException e) {
             // Si la transaccion falla mostramos un msj para que el cliente pueda actuar
 
-            JOptionPane.showMessageDialog(this, "Error al modificar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
         }
 
@@ -388,39 +399,4 @@ public class ModificarDatos extends javax.swing.JFrame {
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarDatos(int numCliente) {
-
-        // traemos a llamar mascota para obtener el obj Mascota  de la BD
-        // por su FK
-        this.mascota = control.traerMascota(numCliente);
-
-        // pre-llenamos el form con los datos actuales
-        txtNombre.setText(mascota.getNombreMascota());
-        txtRaza.setText(mascota.getRaza());
-        txtColor.setText(mascota.getColor());
-        txtObservaciones.setText(mascota.getObservaciones());
-
-        // control de null por si la mascota no tiene responsable
-        if (mascota.getResponsable() != null) {
-            txtNombreResponsable.setText(mascota.getResponsable().getNombre());
-            txtMovilResponsable.setText(mascota.getResponsable().getCelResponsable());
-        }
-
-        // seleccionamos el indice correcto del cmb
-        if (mascota.getAlergico() != null && mascota.getAlergico().equalsIgnoreCase("SI")) {
-
-            cmbAlergico.setSelectedIndex(1);
-
-        } else if (mascota.getAlergico() != null && mascota.getAlergico().equalsIgnoreCase("NO")) {
-
-            cmbAlergico.setSelectedIndex(2);
-        }
-
-        if (mascota.getAtencionEspecial() != null && mascota.getAtencionEspecial().equalsIgnoreCase("SI")) {
-            cmbAtencionEsp.setSelectedIndex(1);
-        } else if (mascota.getAtencionEspecial() != null && mascota.getAtencionEspecial().equalsIgnoreCase("NO")) {
-            cmbAtencionEsp.setSelectedIndex(2);
-        }
-
-    }
 }

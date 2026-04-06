@@ -1,8 +1,8 @@
-package prieto.manuel.maven.peluqueriacanina.logica;
+package prieto.manuel.maven.clinicaveterinaria.logica;
 
 import java.time.LocalDate;
 import java.util.List;
-import prieto.manuel.maven.peluqueriacanina.persistencia.ControladoraPersistencia;
+import prieto.manuel.maven.clinicaveterinaria.persistencia.ControladoraPersistencia;
 
 /**
  *

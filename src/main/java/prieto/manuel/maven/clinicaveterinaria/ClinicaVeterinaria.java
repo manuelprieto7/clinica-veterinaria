@@ -1,18 +1,18 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package prieto.manuel.maven.peluqueriacanina;
+package prieto.manuel.maven.clinicaveterinaria;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import prieto.manuel.maven.peluqueriacanina.igu.Principal;
-import prieto.manuel.maven.peluqueriacanina.persistencia.JpaUtil;
+import prieto.manuel.maven.clinicaveterinaria.igu.Principal;
+import prieto.manuel.maven.clinicaveterinaria.persistencia.JpaUtil;
 
 /**
  *
  * @author G513
  */
-public class PeluqueriaCanina {
+public class ClinicaVeterinaria {
 
     public static void main(String[] args) {
 

@@ -1,10 +1,10 @@
-package prieto.manuel.maven.peluqueriacanina.persistencia;
+package prieto.manuel.maven.clinicaveterinaria.persistencia;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
-import prieto.manuel.maven.peluqueriacanina.logica.Consulta;
-import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
-import prieto.manuel.maven.peluqueriacanina.logica.Responsable;
+import prieto.manuel.maven.clinicaveterinaria.logica.Consulta;
+import prieto.manuel.maven.clinicaveterinaria.logica.Mascota;
+import prieto.manuel.maven.clinicaveterinaria.logica.Responsable;
 
 /**
  *
