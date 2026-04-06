@@ -11,20 +11,24 @@ import prieto.manuel.maven.peluqueriacanina.logica.Controladora;
  *
  * @author G513
  */
-public class CargarDatos extends javax.swing.JFrame {
+public class ModificarDatos extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CargarDatos.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ModificarDatos.class.getName());
 
     Controladora control = new Controladora();
 
     /**
      * Creates new form Principal
      */
-    public CargarDatos() {
+    public ModificarDatos() {
         initComponents();
         //Cargamos la imagen despues de initComponets 
         //porque debe existe anres de podamos asignarle un icono
         cargarImagen();
+    }
+    
+    public ModificarDatos(int numCliente){
+        
     }
 
     /**

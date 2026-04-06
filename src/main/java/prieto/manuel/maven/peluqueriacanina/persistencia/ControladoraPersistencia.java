@@ -1,6 +1,7 @@
 package prieto.manuel.maven.peluqueriacanina.persistencia;
 
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
 import prieto.manuel.maven.peluqueriacanina.logica.Responsable;
 
@@ -57,6 +58,8 @@ public class ControladoraPersistencia {
         }
 
     }
+    
+    
 
     // Read - Traer una mascota
     public Mascota traerMascota(int numCliente) {
@@ -67,6 +70,22 @@ public class ControladoraPersistencia {
         } finally {
             em.close();
 
+        }
+    }
+    
+      // READ — traer todas las mascotas
+    public List<Mascota> traerMascotas() {
+        EntityManager em = getEm();
+        try {
+            // JPQL: lenguaje de consulta de JPA opera sobre clases java
+            // no sobre tablas SQL, "m" es el alias de Mascota
+            return em.createQuery("SELECT m FROM Mascota m", Mascota.class)
+                     .getResultList();
+        } finally {
+            // READ no necesita transacción explícita, pero el EM
+            // siempre se cierra para liberar la conexión
+            
+            em.close();
         }
     }
     

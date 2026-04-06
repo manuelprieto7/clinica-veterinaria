@@ -4,22 +4,33 @@
  */
 package prieto.manuel.maven.peluqueriacanina.igu;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import prieto.manuel.maven.peluqueriacanina.logica.Controladora;
+import prieto.manuel.maven.peluqueriacanina.logica.Mascota;
+
 /**
  *
  * @author G513
  */
 public class VerDatos extends javax.swing.JFrame {
-
+    
+    Controladora control = null;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerDatos.class.getName());
 
     /**
      * Creates new form Principal
      */
     public VerDatos() {
+        // Inicializamos la controladora antes de initComponents
+        // porque cargarTabla() la necesita cuando la ventana abre
+        control = new Controladora();
         initComponents();
-        //Cargamos la imagen despues de initComponets 
-        //porque debe existe anres de podamos asignarle un icono
-        cargarImagen();
+        // Cargamos los datos de la BD al abrir la ventana
+        cargarTabla();
+        
     }
 
     /**
@@ -33,97 +44,119 @@ public class VerDatos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
-        btnVerDatos = new javax.swing.JButton();
-        btnCargarDatos = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaPrincipal = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        jLabel1.setText("Peluquería Canina");
+        jLabel1.setFont(new java.awt.Font("Dubai", 0, 48)); // NOI18N
+        jLabel1.setText("Visualización de Datos");
 
-        btnSalir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setText("Datos de las mascotas: ");
+
+        tablaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaPrincipal);
+
+        btnEliminar.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
-        btnVerDatos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnVerDatos.setText("Ver Datos");
-        btnVerDatos.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerDatosActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        btnCargarDatos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnCargarDatos.setText("Cargar Datos");
-        btnCargarDatos.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCargarDatosActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVerDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnCargarDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVerDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\G513\\Documents\\02JavaPortafolio\\PeluqueriaCanina\\src\\main\\resources\\imagenes\\logo.png")); // NOI18N
-        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,54 +173,131 @@ public class VerDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDatosActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        // Creamos la isntancia de la pantalla de carga
-        CargarDatos pantalla = new CargarDatos();
-        // Creamos en pantalla
-        pantalla.setLocationRelativeTo(null);
-        pantalla.setVisible(true);
-        //Cerramos Principal para no tener ventanas abiertas al mismo tiempo
-        this.dispose();
+        //Verificamos que la tabla tenga filas antes de intentar eliminar
+        if (tablaPrincipal.getRowCount() > 0) {
 
+            // getSelectedRow retorna -1 si el usuario no selecciono ninguna fila
+            if (tablaPrincipal.getSelectedRow() != -1) {
 
-    }//GEN-LAST:event_btnCargarDatosActionPerformed
+                //Columna 0 de la tabla = num_cliente
+                int numCliente = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
 
-    private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
-        // TODO add your handling code here:
-        VerDatos pantalla = new VerDatos();
-        
-    
-        
-    }//GEN-LAST:event_btnVerDatosActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void cargarImagen() {
-        // getResource busca el archivo dentro del classpath
-        // la barra "/" indica que busca desde la raiz del classpath
-        java.net.URL urlImagen = getClass().getResource("/imagenes/logo.png");
-
-        if (urlImagen != null) {
-            //Si encuentra la imagen
-            jLabel2.setIcon(new javax.swing.ImageIcon(urlImagen));
-            // Limpiamos el texto 
-            jLabel2.setText("");
-
+                // llamamos a borrar mascota en la controladora
+                control.borrarMascota(numCliente);
+                JOptionPane.showMessageDialog(this, "Mascota eliminada correctamente", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+                // Recargamos la tabla para reflejar el cambio 
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "No selecciono ninguna mascota.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay mascotas para eliminar.", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+
+        if (tablaPrincipal.getRowCount() > 0) {
+            
+            if (tablaPrincipal.getSelectedRow() != -1) {
+
+                // Obtenemos el Id de la fila seleccionada (columna 0)
+                int numCliente = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
+
+                // Pasamos el id a modificarDatos para que cargue esa mascota
+                // para abrir el formulario de edicion de los datos de esa mascota en especifico
+                ModificarDatos pantalla = new ModificarDatos(numCliente);
+                pantalla.setLocationRelativeTo(null);
+                pantalla.setVisible(true);
+                this.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "No selecciono ninguna mascota.", "Error al editar", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay mascotas para editar.", "Error al editar", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+    
+    private void cargarTabla() {
+        // DefaultTableModel nos permite construir una tabla dinamicamente
+        // La sobreescribimos para evitar que el usuario edite celdas directamente
+
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Ninguna celda es editable solo se edita desde ModificarDatos
+                return false;
+            }
+        };
+
+        // Definimos los nombres de las Columnas
+        String[] titulos = {"Num", "Nombre", "Raza", "Color", "Alérgico", "At. Esp", "Responsable", "Móvil"};
+        
+        modeloTabla.setColumnIdentifiers(titulos);
+
+        // Llamamos a traer Mascotas 
+        // para obtener la lista completa de las mascotas con sus responsables de la BD
+        List<Mascota> lista = control.traerMascotas();
+        
+        if (lista != null) {
+            for (Mascota masco : lista) {
+                String nombreResp = (masco.getResponsable() != null)
+                        ? masco.getResponsable().getNombre() : "Sin Responsable";
+                
+                String movilResp = (masco.getResponsable() != null) ? masco.getResponsable().getCelResponsable() : "-";
+
+                // Creamos el array con los datos de cada fila
+                // Object[]
+                Object[] fila = {
+                    masco.getNum_cliente(),
+                    masco.getNombreMascota(),
+                    masco.getRaza(),
+                    masco.getColor(),
+                    masco.getAlergico(),
+                    masco.getAtencionEspecial(),
+                    masco.getObservaciones(),
+                    nombreResp,
+                    movilResp
+                
+                };
+                
+                modeloTabla.addRow(fila);
+            }
+            
+        }
+        
+        tablaPrincipal.setModel(modeloTabla);
+        
     }
+    
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        Principal ventana = new Principal();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCargarDatos;
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnVerDatos;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaPrincipal;
     // End of variables declaration//GEN-END:variables
 
 }

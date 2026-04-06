@@ -1,5 +1,6 @@
 package prieto.manuel.maven.peluqueriacanina.logica;
 
+import java.util.List;
 import prieto.manuel.maven.peluqueriacanina.persistencia.ControladoraPersistencia;
 
 /**
@@ -51,6 +52,16 @@ public class Controladora {
         cp.guardar(responsable, mascota);
         
     }
+    
+    
+        // READ — todas las mascotas
+  
+    public List<Mascota> traerMascotas() {
+        // Llama a traerMascotas en ControladoraP
+        // obtener la lista completa desde la BD
+        return cp.traerMascotas();
+    }
+
 
     // Read - una mascota por ID
     public Mascota traerMascota(int numCliente) {
