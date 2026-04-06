@@ -90,7 +90,8 @@ public class ControladoraPersistencia {
         try {
             // JPQL : traemos solo las consultas de la mascota seleccionada
             // filtrando por el Id de mascota en la fk
-            return em.createQuery("SELECT c FROM Consulta c WHERE c.mascota.num_cliente = :idMascota",
+            return em.createQuery("SELECT c FROM Consulta c WHERE c.mascota.num_cliente = :idMascota " +
+                    "ORDER BY c.fechaConsulta DESC",
                     Consulta.class).setParameter("idMascota", idMascota).getResultList();
 
         } finally {
