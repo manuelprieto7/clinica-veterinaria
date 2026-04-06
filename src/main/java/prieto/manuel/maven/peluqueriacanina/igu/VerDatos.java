@@ -4,6 +4,8 @@
  */
 package prieto.manuel.maven.peluqueriacanina.igu;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +32,20 @@ public class VerDatos extends javax.swing.JFrame {
         initComponents();
         // Cargamos los datos de la BD al abrir la ventana
         cargarTabla();
+        
+         // cuando el usuario cierra la ventana, volvemos a mostrar principal
+         
+         addWindowListener(new WindowAdapter(){
+             
+             @Override
+             public void windowClosing(WindowEvent evt){
+                 Principal ventana = new Principal();
+                 ventana.setLocationRelativeTo(null);
+                 ventana.setVisible(true);
+             }
+             
+         });
+         
         
     }
 
