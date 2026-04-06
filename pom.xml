@@ -36,4 +36,5 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>prieto.manuel.maven.peluqueriacanina.PeluqueriaCanina</exec.mainClass>
     </properties>
+    <name>ClinicaVeterinaria</name>
 </project>
